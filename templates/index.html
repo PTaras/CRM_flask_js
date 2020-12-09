@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    CRM
+{% endblock %}
+
+{% block body %}
+<main>
+   <div class="container">
+       <table class="table table-striped table-dark">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+   </div>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+    <div class="fixed-bottom" style="padding: 0 0 10px 0;">
+        <p class="mb-1">© 2020 Taras Production</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </div>
+  </footer>
+</main>
+{% endblock %}

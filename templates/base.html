@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, user-scalable=nom initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Top navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item me-2">
+          <a class="btn btn-primary" href="/logos" tabindex="-1" aria-disabled="true">Logos</a>
+        </li>
+        <li class="nav-item me-2">
+          <a class="btn btn-warning" href="/add-logo" tabindex="-1" aria-disabled="true">Add logo</a>
+        </li>
+<!--          <li class="nav-item me-2">-->
+<!--              <input id="enter-domain" type="text" value="" placeholder="Enter domain" required>-->
+<!--              <button class="btn btn-success" id='get-logo' tabindex="-1" aria-disabled="true" onClick="getLogo()">Get logo</button>-->
+<!--        </li>-->
+      </ul>
+      <form class="d-flex">
+          <input class="form-control me-2" type="text" id="text-to-find" value="" placeholder="Search" autofocus required>
+              <input class="btn btn-outline-success" type="button" onclick="javascript: FindOnPage('text-to-find',false); return false;" value=" " title="Отменить поиск">
+              <input class="btn btn-outline-success" type="button" onclick="javascript: FindOnPage('text-to-find',true); return false;" value=" " title="Начать поиск">
+<!--        <input class="form-control me-2" id="text-to-find" value="" type="search" placeholder="Search" aria-label="Search">-->
+<!--        <button class="btn btn-outline-success" type="submit" onclick="javascript: FindOnPage('text-to-find',false); return false;">Search</button>-->
+      </form>
+    </div>
+  </div>
+</nav>
+    {% block body %}  {% endblock %}
+
+</body>
+<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/find.js') }}"></script>
+</html>

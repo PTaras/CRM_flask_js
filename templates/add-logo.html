@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    CRM
+{% endblock %}
+
+
+{% block body %}
+    <div class="container mt-5">
+        <h2>Add logo</h2>
+        <form method="post">
+            <input type="text" name="domain" id="domain" value="" class="form-control" placeholder="enter domain" required><br>
+            <input type="submit" class="btn btn-success" value="Add logo into base">
+        </form><br>
+        <button class="btn btn-success" id='get-logo' tabindex="-1" aria-disabled="true" onClick="getLogo()">Show logo</button>
+    </div>
+<div class="container" id="imgLogo"  onClick="showLogo()">
+    <img class="rounded mx-auto d-block" id="myImg" src="" alt="">
+        <div id="myModal" class="modal">
+          <span class="close">&times;</span>
+          <img class="modal-content" id="img01" src="">
+          <div id="caption"></div>
+        </div>
+</div>
+{% endblock %}
