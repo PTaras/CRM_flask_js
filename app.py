@@ -3,15 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from datetime import datetime
 import urllib.request
-import os
-import tkinter as tk
+from tkinter import *
+from tkinter import ttk
 from tkinter import filedialog
-
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///logos.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 
 class Logo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -24,6 +24,36 @@ class Logo(db.Model):
     def __repr__(self):
         return '<Logo %r>' % self.id
 
+
+def loop():
+    gui = Tk()
+    gui.geometry("400x300")
+    gui.wm_attributes("-topmost", 1)
+    gui.title("Choose path for save:")
+
+    def getFolderPath():
+        folder_selected = filedialog.askdirectory()
+        folderPath.set(folder_selected)
+
+    def doStuff():
+        folder = folderPath.get()
+        return folder
+
+    def close_window():
+        gui.destroy()
+
+    folderPath = StringVar()
+    E = Entry(gui, textvariable=folderPath)
+    E.grid(row=2, column=2)
+    E.focus()
+    E.focus_set()
+    btnFind = ttk.Button(gui, text="Browse Folder", command=getFolderPath)
+    btnFind.grid(row=2, column=3)
+
+    c = ttk.Button(gui, text="Save", command=close_window)
+    c.grid(row=6, column=2)
+    gui.mainloop()
+    return doStuff()
 
 @app.route('/')
 def index():
@@ -53,19 +83,12 @@ def download_logo(id):
     save_logo = Logo.query.get_or_404(id)
 
     try:
-        root = tk.Tk()
-        root.withdraw()
-        file_path = filedialog.askdirectory()
-        # img = urllib.request.urlretrieve("{}".format(save_logo.logo), "{}.png".format(save_logo.domain))
-        # img_data = requests.get('https://logo.clearbit.com/jooble.com').content
-        # f = open(os.path.join(file_path, img))
-        # with open('image_name.png', 'wb') as handler:
-        #     handler.write(img)
-        # with open('C:\\Users\\38050\\Desktop\\02', 'wb') as localFile:
-        #     localFile.write(img.read())
+        path = loop()
+        urllib.request.urlretrieve("{}".format(save_logo.logo), "{}.png".format(path + "/" + save_logo.domain))
         return redirect('/logos')
     except:
-        return 'Error'
+        return 'Sorry, logo not save. Try, please, again.'
+
 
 @app.route('/add-logo', methods=['POST', 'GET'])
 def add_logo():
