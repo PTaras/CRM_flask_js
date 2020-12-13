@@ -34,7 +34,7 @@ result http://127.0.0.1:5000/logos
 </pr>
 <h4>Страница добавления логотипа</h4>
 <img src="https://github.com/PTaras/CRM_flask_js/blob/main/static/img/add.png" alt="add">
- <h4>Просмотр логотипа, недобавляя в базу</h4>
+ <h4>Просмотр логотипа, перед добавлением в базу</h4>
  <img src="https://github.com/PTaras/CRM_flask_js/blob/main/static/img/pre.png" alt="Pre">
  <p>Вы можете ввести домен или ссылку в поле и не сразу добавлять логотип в базу, а просмотреть как выглядит сам логотип и валидный ли он, нажав кнопку <b>Show logo</b>. После просмотра вы можете его скрыть (кликнув по картинке) или же добавить запись в таблицу, нажав <b>Add logo into base</b></p>.
   
