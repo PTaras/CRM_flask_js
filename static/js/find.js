@@ -9,13 +9,13 @@ function FindOnPage(name, status) {
 
 	input = document.getElementById(name).value; //получаем значение из поля в html
 
-	if(input.length<3&&status==true)
+	if(input.length < 3 && status==true)
 	{
-		alert('<h1>Для поиска вы должны ввести три или более символов</h1>');
+		alert('Для поиска вы должны ввести три или более символов');
 		function FindOnPageBack() { document.body.innerHTML = locale_HTML; }
 	}
 
-	if(input.length>=3)
+	if(input.length >= 3)
 	{
 		function FindOnPageGo() {
 
@@ -25,7 +25,7 @@ function FindOnPage(name, status) {
 			result_arr = [];   //в этом массиве будем хранить результат работы (подсветку)
 
 			var warning = true;
-			for(var i=0;i<result.length;i++) {
+			for(var i=0; i<result.length; i++) {
 				if(result[i].match(eval(search))!=null) {
 					warning = false;
 				}

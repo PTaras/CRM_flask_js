@@ -1,11 +1,23 @@
 function getLogo() {
-            var getDomain = document.getElementById("domain").value;
-            var show = document.getElementById("imgLogo");
-            imgurl = 'https://logo.clearbit.com/' + getDomain.trim();
-            const modalImg = document.getElementById('myImg');
-            show.style.display = "block";
-            modalImg.src = imgurl;
-            modalImg.alt = getDomain.trim();
+   var getDomain = document.getElementById("domain").value;
+   var show = document.getElementById("imgLogo");
+   var delTrim = getDomain.trim();
+   if (delTrim.match(/http.*/) === null) {
+       const imgurl = 'https://logo.clearbit.com/' + delTrim;
+       const modalImg = document.getElementById('myImg');
+       show.style.display = "block";
+       modalImg.src = imgurl;
+       modalImg.alt = delTrim;
+   } else {
+       const url = new URL(delTrim);
+       const imglURL = url.hostname;
+       const imgurl = 'https://logo.clearbit.com/' + imglURL;
+       const modalImg = document.getElementById('myImg');
+       console.log(imglURL, imgurl)
+       show.style.display = "block";
+       modalImg.src = imgurl;
+       modalImg.alt = imglURL;
+   }
   };
 
  function showLogo() {

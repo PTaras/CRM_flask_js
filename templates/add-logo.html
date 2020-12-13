@@ -7,12 +7,17 @@
 
 {% block body %}
     <div class="container mt-5">
-        <h2>Add logo</h2>
-        <form method="post">
-            <input type="text" name="domain" id="domain" value="" class="form-control" placeholder="enter domain" required><br>
-            <input type="submit" class="btn btn-success" value="Add logo into base">
-        </form><br>
-        <button class="btn btn-success" id='get-logo' tabindex="-1" aria-disabled="true" onClick="getLogo()">Show logo</button>
+        <h2 class="text-center">Add logo</h2>
+        <div class="row">
+            <div class="col-sm-9">
+                <form method="post">
+                    <input type="text" name="domain" id="domain" value="" width="200px" class="form-control" placeholder="Enter domain/url" required><br>
+                    <input type="submit" class="btn btn-success" value="Add logo into base">
+                </form>
+            </div>
+            <br>
+            <div class="col-sm-3"> <button class="btn btn-success" id='get-logo' tabindex="-1" aria-disabled="true" onClick="getLogo()">Show logo</button></div>
+        </div>
     </div>
 <div class="container" id="imgLogo"  onClick="showLogo()">
     <img class="rounded mx-auto d-block" id="myImg" src="" alt="">

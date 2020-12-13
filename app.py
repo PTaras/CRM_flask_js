@@ -6,17 +6,18 @@ import urllib.request
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+from urllib.parse import urlparse
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///logos.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///logos_all.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
 class Logo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    domain = db.Column(db.String(100),  nullable=False, unique=True)
-    logo = db.Column(db.String(300), nullable=False)
+    domain = db.Column(db.String(100), nullable=False, unique=True)
+    logo = db.Column(db.String(300), unique=True, nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     delete_button = db.Column(db.String(100), nullable=False)
     download_button = db.Column(db.String(100), nullable=False)
@@ -55,10 +56,6 @@ def loop():
     gui.mainloop()
     return doStuff()
 
-@app.route('/')
-def index():
-    return render_template("index.html")
-
 
 @app.route('/logos')
 def logos():
@@ -87,14 +84,24 @@ def download_logo(id):
         urllib.request.urlretrieve("{}".format(save_logo.logo), "{}.png".format(path + "/" + save_logo.domain))
         return redirect('/logos')
     except:
-        return 'Sorry, logo not save. Try, please, again.'
+        return 'Sorry, logo not save. Please, choose path and try, please, again.'
 
 
 @app.route('/add-logo', methods=['POST', 'GET'])
 def add_logo():
     if request.method == 'POST':
         domain = request.form['domain']
-        logo_url = 'https://logo.clearbit.com/{}'.format(domain)
+        logos_all = Logo.query.order_by(Logo.date_created).all()
+        if len(logos_all) > 0:
+            for dom in logos_all:
+                if domain == dom.domain or urlparse(domain).netloc == dom.domain:
+                    return "Logo exist in base!"
+
+        if bool(re.match(r'http.*', domain)) == True:
+            logo_url = 'https://logo.clearbit.com/{}'.format(urlparse(domain).netloc)
+            domain = urlparse(domain).netloc
+        elif bool(re.match(r'http.*', domain)) == False:
+            logo_url = 'https://logo.clearbit.com/{}'.format(domain)
         delete_button = 'Delete'
         download_button = 'Download'
 
